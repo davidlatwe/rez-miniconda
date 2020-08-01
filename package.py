@@ -8,7 +8,11 @@ description = "The Python programming language."
 # $ conda search python
 version = "2.7.18"
 
-build_command = "conda create --prefix $REZ_BUILD_INSTALL_PATH --yes"
+variants = [
+    ["platform-osx"],
+]
+
+build_command = "conda create --prefix $REZ_BUILD_INSTALL_PATH python=2.7.18 --yes"
 
 
 def commands():

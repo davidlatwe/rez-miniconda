@@ -26,7 +26,7 @@ def version():
         exec(add_args.read(), {"parser": parser})
 
     args, unknown = parser.parse_known_args()  # parse `sys.argv`
-    python_version = args.python
+    python_version = args.version
 
     # raise `subprocess.CalledProcessError` if no matched version found
     subprocess.check_output(["conda",
@@ -38,6 +38,11 @@ def version():
 
 variants = [
     ["platform-*"],
+]
+
+
+build_requires = [
+    "miniconda",
 ]
 
 

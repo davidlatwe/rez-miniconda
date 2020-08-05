@@ -10,8 +10,15 @@ description = "The Python programming language.(Ship via Miniconda)"
 def version():
     """Define Python version from command line option
     """
+    import sys
     import argparse
     import subprocess
+
+    if any(help_ in sys.argv[1:] for help_ in ["-h", "--help"]):
+        # Skip parsing version string if user is asking for help,
+        # or the following parser will print out it's own help
+        # message without rez-build's.
+        return ""
 
     parser = argparse.ArgumentParser()
 

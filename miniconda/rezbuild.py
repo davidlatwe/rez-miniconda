@@ -67,14 +67,18 @@ def on_nt(url, dst):
     download(url, file_name)
 
     log.info("Installing..")
-    subprocess.check_output(["start",
-                             "/wait",
-                             "\"\"",
-                             file_name,
-                             "/InstallationType=JustMe",
-                             "/RegisterPython=0",
-                             "/S",
-                             "/D=%s" % dst])
+    subprocess.check_output(
+        [
+            "start",
+            "/wait",
+            file_name,
+            "/InstallationType=JustMe",
+            "/RegisterPython=0",
+            "/S",
+            "/D=%s" % dst
+        ],
+        shell=True  # Avoid FileNotFoundError: [WinError 2]
+    )
 
 
 def on_posix(url, dst):
@@ -98,7 +102,10 @@ def download(url, file_name):
     f = open(file_name, "wb")
 
     meta = u.info()
-    file_size = int(meta.getheaders("Content-Length")[0])
+    if hasattr(meta, "getheader"):
+        file_size = int(meta.getheaders("Content-Length")[0])
+    else:
+        file_size = int(meta.get("Content-Length")[0])
 
     print("Downloading: %s Bytes: %s" % (file_name, file_size))
 

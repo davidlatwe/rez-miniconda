@@ -1,12 +1,12 @@
-## rez-python
+## rez-miniconda
 
 *Ship Python to Rez by Miniconda with any version you need.*
 
 Usage:
 
 ```
-cd rez-python/minconda
+cd rez-miniconda/minconda
 rez-build --install
-cd rez-python/python
+cd rez-miniconda/python
 rez-build --install --version=3.6
 ```

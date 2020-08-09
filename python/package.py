@@ -12,7 +12,6 @@ def version():
     """
     import sys
     import argparse
-    import subprocess
 
     if any(help_ in sys.argv[1:] for help_ in ["-h", "--help"]):
         # Skip parsing version string if user is asking for help,
@@ -27,11 +26,6 @@ def version():
 
     args, unknown = parser.parse_known_args()  # parse `sys.argv`
     python_version = args.version
-
-    # raise `subprocess.CalledProcessError` if no matched version found
-    subprocess.check_output(["conda",
-                             "search",
-                             "python=%s" % python_version])
 
     return python_version
 

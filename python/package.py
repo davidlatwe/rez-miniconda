@@ -50,7 +50,15 @@ build_command = "python {root}/rezbuild.py {install}"
 
 
 def commands():
-    env.PATH.prepend("{root}/payload/bin")
+    system = globals()["system"]
+    env = globals()["env"]
+
+    if system.platform == "windows":
+        env.PATH.prepend("{root}/payload/Library/bin")
+        env.PATH.prepend("{root}/payload/Scripts")
+        env.PATH.prepend("{root}/payload")
+    else:
+        env.PATH.prepend("{root}/payload/bin")
 
 
 uuid = "repository.python"

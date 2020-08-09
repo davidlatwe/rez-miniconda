@@ -69,15 +69,12 @@ def on_nt(url, dst):
     log.info("Installing..")
     subprocess.check_output(
         [
-            "start",
-            "/wait",
             file_name,
             "/InstallationType=JustMe",
             "/RegisterPython=0",
             "/S",
             "/D=%s" % dst
-        ],
-        shell=True  # Avoid FileNotFoundError: [WinError 2]
+        ]
     )
 
 

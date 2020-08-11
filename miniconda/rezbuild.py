@@ -1,3 +1,4 @@
+from __future__ import print_function
 
 import os
 import sys
@@ -115,9 +116,8 @@ def download(url, file_name):
 
         file_size_dl += len(buffer)
         f.write(buffer)
-        status = r"%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
-        status = status + chr(8) * (len(status) + 1)
-        print(status)
+        status = "\r%10d  [%3.2f%%]" % (file_size_dl, file_size_dl * 100. / file_size)
+        print(status, end="\r")
 
     f.close()
 
